@@ -25,11 +25,13 @@ text_desktop()
 html = urllib.request.urlopen(url)  # obtenemos pagina web haciendo peticion
 soup = BeautifulSoup(html, "html.parser")  # lo transformamos a objeto BS para obtener etiquetas
 tags = soup("a")  # extraemos las etiquetas del tipo indicado
+
 print("ENLACES EN LA PAGINA PRINCIPLAL\r\n")
 for tag in tags:
     if len(tag.get("href")) > 2:  # comprobamos que no sean enlaces vacios o erroneos
         print(tag.contents, tag.get("href"))  # texto de cada enlace y su url
 
+        
 print("\r\n\r\n ENLACES EN LAS PAGINAS SECUNDARIAS\r\n")
 for tag in tags:
     newurl = tag.get("href")  # obtenemos los enlaces de dentro de la pag
@@ -49,4 +51,5 @@ for tag in tags:
     except:
         print("algo ha fallado")  # va a dar fallos porque habria que cambiar el agente usado
 
+        
 sys.stdout.close()
